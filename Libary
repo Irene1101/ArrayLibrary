@@ -1,0 +1,132 @@
+import java.util.Scanner;
+
+public class Libary extends ArrayList<Object>{
+	private ArrayList<Book> books = new ArrayList<Book>();
+	public static Scanner in;
+	
+	public void list() {
+		for(int i = 1; i<=20; i++) {
+			String s = "Book" + i;
+			books.add(new Book(s));
+		}
+	}
+	
+	public void sortByYear() {
+		for (int i = 0; i< books.getSize(); i++) {
+			int min = i;
+			for (int j = i +1; j < books.getSize(); j++) {
+				if(books.get(j).getYear()< books.get(i).getYear()) {
+					min = j;
+				}
+			}
+			Book temp = books.get(i);
+			books.set(i,books.get(min));
+			books.set(min,temp);
+		} 
+		
+	}
+	
+	public void sortByPage() {
+		for (int i = 0; i< books.getSize(); i++) {
+			int min = i;
+			for (int j = i +1; j < books.getSize(); j++) {
+				if(books.get(j).getPage()< books.get(i).getPage()) {
+					min = j;
+				}
+			}
+			Book temp = books.get(i);
+			books.set(i,books.get(min));
+			books.set(min,temp);
+		} 
+		
+	}
+	
+	public void sortByRating() {
+		for (int i = 0; i< books.getSize(); i++) {
+			int max = i;
+			for (int j = i +1; j < books.getSize(); j++) {
+				if(books.get(j).getRating()> books.get(i).getRating()) {
+					max = j;
+				}
+			}
+			Book temp = books.get(i);
+			books.set(i,books.get(max));
+			books.set(max,temp);
+		} 
+	}
+	
+	public void searchBySubject() {
+		String res = "";
+		in = new Scanner(System.in);
+		System.out.println("Search Subject: ");
+		String response= in.nextLine();
+		for(int i = 0; i<books.getSize();i++) {
+			if (books.get(i).getSubject().equals(response)) {
+				res += books.get(i).getTitle() + " ";
+			}
+		}
+		System.out.println(res);
+	}
+	
+	public void searchByName() {
+		String res = "";
+		in = new Scanner(System.in);
+		System.out.print("Search Name: ");
+		String response= in.nextLine();
+		for(int i = 0; i<books.getSize();i++) {
+			if (books.get(i).getTitle().equals(response)) {
+				res += books.get(i).getTitle() + ", " + books.get(i).getYear()+ ", " + books.get(i).getPage()+ ", " + books.get(i).getRating()+ ", "+ books.get(i).getSubject();
+			}
+		}		
+		System.out.println(res);
+	}
+	
+	public void addBook() {
+		in = new Scanner(System.in);
+		System.out.println("Title: ");
+		String title = in.nextLine();
+		System.out.println("Year: ");
+		int year = in.nextInt();
+		System.out.println("Number of Page: ");
+		int page = in.nextInt();
+		System.out.println("Rating: ");
+		double rating = in.nextDouble();
+		in.nextLine();
+		System.out.println("Subject: ");
+		String subject = in.nextLine();
+		
+		Book book = new Book(title, year, page, rating, subject);
+		books.add(book);
+		
+	}
+	
+	public void printBook() {
+		for(int i = 0; i < books.getSize(); i++) {
+			System.out.print(books.get(i).getTitle() + " ");
+		}
+		System.out.println();
+	}
+	
+	public void menu() {
+	Scanner in = new Scanner (System.in);
+	int response = 0;
+	
+	do {
+		System.out.println("SearchSubject(1)/ SearchTitle(2)/ AddBook(3)/ Exit(4)");
+		response = in.nextInt();
+		in.nextLine();
+		switch (response) {
+		case 1 :
+		searchBySubject();
+		break;
+		case 2:
+		searchByName();
+		break;
+		case 3:
+		addBook();
+		break;
+		}
+	} while (response != 4);
+	}
+}
+
