@@ -1,0 +1,70 @@
+import java.util.Random;
+
+public class Book {
+	private String title;
+	private int year;
+	private int page;
+	private String subject;
+	private double rate;
+	private ArrayList<Integer> num;
+	private Random ran;
+	
+	String[] subjects = {"Programming", "Data Structures", "Algorithms", "Operating Systems", "Gaming"};
+	public Book(String name) {
+		title = name; 
+		year = randomYear();
+		page = (int)(Math.random() * 901)+ 100;
+		rate = (double)(Math.random() * 10.0);
+		subject = randomSubject();
+		}
+	
+	public int randomYear() {
+		Random r = new Random();
+		int rdYear = r.nextInt(1000, 2000);
+		return rdYear;
+	}
+
+	public String randomSubject() {
+		int[] subjectCounts = {0,0,0,0,0};
+		int i = (int)(Math.random()* 5);
+		if(subjectCounts[i] < 5) {
+		subjectCounts[i] ++;
+		return subjects[i];
+		}
+		return randomSubject();
+		}
+
+	
+	public Book (String ttle, int yr, int pg, double rte, String sbj) {
+		ttle = title;
+		yr = year;
+		pg = page;
+		sbj = subject;
+		rte = rate;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+	
+	public int getYear() {
+		return year;
+	}
+	
+	public int getPage() {
+		return page;
+	}
+	
+	public String getSubject() {
+		return subject;
+	}
+	
+	public double getRating() {
+		return rate;
+	}
+	
+
+	
+}
+
+	
