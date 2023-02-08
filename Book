@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.io.*;
+import java.lang.*;
 
 public class Book {
 	private String title;
@@ -6,32 +8,36 @@ public class Book {
 	private int page;
 	private String subject;
 	private double rate;
-	private ArrayList<Integer> num;
-	private Random ran;
+	private static final String[] subjects = {"Programming", "Data Structures", "Algorithms", "Operating Systems", "Gaming"};
+	private static boolean[] range = new boolean[40];
+	private static Random r = new Random();
+	double rt = (double)(Math.random() * 10.0);
+	private static int[] subjectCounts = {0,0,0,0,0};
 	
-	String[] subjects = {"Programming", "Data Structures", "Algorithms", "Operating Systems", "Gaming"};
 	public Book(String name) {
 		title = name; 
 		year = randomYear();
 		page = (int)(Math.random() * 901)+ 100;
-		rate = (double)(Math.random() * 10.0);
+		rate = Math.round(rt * 10) / 10.0;
 		subject = randomSubject();
 		}
 	
 	public int randomYear() {
-		Random r = new Random();
-		int rdYear = r.nextInt(1000, 2000);
+		int rdYear = r.nextInt(40)+ 1980;
+		while (range[rdYear-1980]) {
+			rdYear = r.nextInt(40)+ 1980;
+		}
+		range[rdYear-1980] = true;
 		return rdYear;
 	}
 
 	public String randomSubject() {
-		int[] subjectCounts = {0,0,0,0,0};
-		int i = (int)(Math.random()* 5);
-		if(subjectCounts[i] < 5) {
-		subjectCounts[i] ++;
-		return subjects[i];
+		int rd = r.nextInt(subjects.length);
+		while (subjectCounts[rd] >=5) {
+			rd = r.nextInt(subjects.length);
 		}
-		return randomSubject();
+		subjectCounts[rd]++;
+		return subjects[rd];
 		}
 
 	
