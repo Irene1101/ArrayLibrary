@@ -5,12 +5,11 @@ public class Driver {
 		myLibrary.list();
 		myLibrary.printBook();;
 		myLibrary.sortByYear();
-		myLibrary.printBook();
 		myLibrary.sortByPage();
-		myLibrary.printBook();
 		myLibrary.sortByRating();
-		myLibrary.printBook();
 		myLibrary.menu();
 	}
 }
 		
+	
+
