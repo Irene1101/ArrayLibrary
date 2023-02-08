@@ -12,47 +12,58 @@ public class Libary extends ArrayList<Object>{
 	}
 	
 	public void sortByYear() {
-		for (int i = 0; i< books.getSize(); i++) {
-			int min = i;
-			for (int j = i +1; j < books.getSize(); j++) {
-				if(books.get(j).getYear()< books.get(i).getYear()) {
-					min = j;
+		for(int i = 0; i < books.getSize(); i ++) {
+			for(int j = i + 1; j < books.getSize(); j ++) {
+				if(books.get(j).getYear() < books.get(i).getYear()) {
+				Book temp = books.get(i);
+				books.set(i, books.get(j));
+				books.set(j, temp);
 				}
 			}
-			Book temp = books.get(i);
-			books.set(i,books.get(min));
-			books.set(min,temp);
-		} 
-		
+		}
+		System.out.println("Sort by year");
+		for(int i = 0; i < books.getSize(); i ++) {
+			System.out.println("Title: " + books.get(i).getTitle()
+			+ "/ Year: " + books.get(i).getYear());
+			}
+		System.out.println();
 	}
 	
 	public void sortByPage() {
-		for (int i = 0; i< books.getSize(); i++) {
-			int min = i;
-			for (int j = i +1; j < books.getSize(); j++) {
-				if(books.get(j).getPage()< books.get(i).getPage()) {
-					min = j;
+		for(int i = 0; i < books.getSize(); i ++) {
+			for(int j = i + 1; j < books.getSize(); j ++) {
+				if(books.get(j).getPage() < books.get(i).getPage()) {
+				Book temp = books.get(i);
+				books.set(i, books.get(j));
+				books.set(j, temp);
 				}
 			}
-			Book temp = books.get(i);
-			books.set(i,books.get(min));
-			books.set(min,temp);
-		} 
-		
+		}
+		System.out.println("Sort by page");
+		for(int i = 0; i < books.getSize(); i ++) {
+			System.out.println("Title: " + books.get(i).getTitle()
+			+ "/ Page:" + books.get(i).getPage());
+			}
+		System.out.println();
+
 	}
 	
 	public void sortByRating() {
-		for (int i = 0; i< books.getSize(); i++) {
-			int max = i;
-			for (int j = i +1; j < books.getSize(); j++) {
-				if(books.get(j).getRating()> books.get(i).getRating()) {
-					max = j;
+		for(int i = 0; i < books.getSize(); i ++) {
+			for(int j = i + 1; j < books.getSize(); j ++) {
+				if(books.get(j).getRating() < books.get(i).getRating()) {
+				Book temp = books.get(i);
+				books.set(i, books.get(j));
+				books.set(j, temp);
 				}
 			}
-			Book temp = books.get(i);
-			books.set(i,books.get(max));
-			books.set(max,temp);
-		} 
+		}
+		System.out.println("Sort by rating");
+		for(int i = 0; i < books.getSize(); i ++) {
+			System.out.println("Title: " + books.get(i).getTitle()
+			+ "/ Rating: " + books.get(i).getRating());
+			}
+		System.out.println();
 	}
 	
 	public void searchBySubject() {
@@ -101,18 +112,23 @@ public class Libary extends ArrayList<Object>{
 	}
 	
 	public void printBook() {
-		for(int i = 0; i < books.getSize(); i++) {
-			System.out.print(books.get(i).getTitle() + " ");
-		}
+		System.out.println("Your Library");
+		for(int i = 0; i < books.getSize(); i ++) {
+			System.out.println("Title: " + books.get(i).getTitle()
+			+ "/ Year: " + books.get(i).getYear()
+			+ "/ Page: " + books.get(i).getPage()
+			+ "/ Subject: " + books.get(i).getSubject()
+			+ "/ Rating: " + books.get(i).getRating());
+			}
 		System.out.println();
 	}
-	
+
 	public void menu() {
 	Scanner in = new Scanner (System.in);
 	int response = 0;
 	
 	do {
-		System.out.println("SearchSubject(1)/ SearchTitle(2)/ AddBook(3)/ Exit(4)");
+		System.out.println("SearchSubject(1)/ SearchTitle(2)/ AddBook(3)/ ListBooks(4)/ Exit(5)");
 		response = in.nextInt();
 		in.nextLine();
 		switch (response) {
@@ -125,8 +141,11 @@ public class Libary extends ArrayList<Object>{
 		case 3:
 		addBook();
 		break;
+		case 4 : 
+		printBook();
+		break;
 		}
-	} while (response != 4);
+	} while (response != 5);
 	}
 }
 
